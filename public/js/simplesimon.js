@@ -1,31 +1,66 @@
 "use strict";
 
 var simonSays = [];
-var userResponds = [];
+var userIndex = 0;
 
-function animateSquare (square) {
-	square.addClass('active');
+//  user logic
+
+$(".square").click(function (e) {
+	var squareClicked = $(this).attr('id');
+	animateSquare(squareClicked);
+
+	if (squareClicked == simonSays[userIndex]) {
+		userIndex += 1;
+		if (userIndex == simonSays.length) {
+			simonsTurn();
+			userIndex = 0;
+		}
+	} else {
+		gameOver();
+	}
+
+});
+
+function animateSquare (id) {
+	$('#' + id).addClass('active');
 	setTimeout(function () {
-		square.removeClass('active');
+		$('#' + id).removeClass('active');
 	}, 250)
 }
 
-$(".square").click(function (e) {
-	var squareClicked = $(this);
-	animateSquare(squareClicked);
-})
 
+// simon logic
 function simonRandom () {
 	var squares = $('.square');
 	var random = Math.floor(Math.random() * 4);
-	simonSays.push(squares[random]);
-	console.log(simonSays);
-	return squares[random];
+	var buttonToAnimate = squares[random];
+	var id = buttonToAnimate.getAttribute('id');
+	simonSays.push(id);
 }
 
-function simonAct () {
-	var simonChoice = simonRandom();
-	animateSquare(simonChoice);
+function simonPlays () {
+	$('#round').text("Round(s): " + simonSays.length);
+	var i = 0;
+	var intervalId = setInterval(function () {
+		if (i >= simonSays.length) {
+			clearInterval(intervalId);
+		}
+		animateSquare(simonSays[i]);
+		i += 1;
+	}, 250);
 }
 
-simonActs();
+function simonsTurn () {
+	simonRandom();
+	simonPlays();
+}
+
+function gameOver() {
+    location.reload(true);
+	alert('GAME OVER! You made it ' + simonSays.length + ' rounds! Thanks for playing!')
+}
+
+$('#play').click(function (e) {
+	simonSays = [];
+	simonsTurn();
+});
