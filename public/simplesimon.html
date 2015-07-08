@@ -11,13 +11,19 @@
 		<link rel="stylesheet" type="text/css" href="/css/simplesimon.css">
 	</head>
 	<body>
+		<audio id="gameOverAudio" src="/audio/RingAroundTheRosie.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="inGameAudio" src="/audio/horrorambient_0.mp3" type="audio/mpeg">
+		</audio>
+
 		<div class="container" id="gamebox">
-			<div class="square" id="orange"></div>
+			<div class="square" id="brown"></div>
 			<div class="square" id="red"></div>
-			<div class="square" id="green"></div>
+			<div class="square" id="violet"></div>
 			<div class="square" id="blue"></div>
-		<a class="btn btn-default rotate" id="play" href="#" role="button">Play</a>
-		<button id="round" class="btn btn-defailt rotateRound">Round # 0</button>
+			<a class="btn btn-danger rotate" id="play" href="#" role="button">Play</a>
+			<button id="round" class="btn btn-danger rotateRound">Round # 1</button>
+			<a class="btn btn-danger" id="advanced" href="#" role="button">Advanced</a>
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="/js/simplesimon.js"></script>

@@ -2,9 +2,9 @@
 
 var simonSays = [];
 var userIndex = 0;
+var advancedPlay = false;
 
 //  user logic
-
 $(".square").click(function (e) {
 	var squareClicked = $(this).attr('id');
 	animateSquare(squareClicked);
@@ -15,7 +15,7 @@ $(".square").click(function (e) {
 			simonsTurn();
 			userIndex = 0;
 		}
-	} else {
+	} else {;
 		gameOver();
 	}
 
@@ -27,7 +27,6 @@ function animateSquare (id) {
 		$('#' + id).removeClass('active');
 	}, 250)
 }
-
 
 // simon logic
 function simonRandom () {
@@ -50,17 +49,38 @@ function simonPlays () {
 	}, 250);
 }
 
+function simonsAdvancedPlay () {
+	$('#round').text("Round(s): " + simonSays.length);
+	setTimeout(function () {
+		animateSquare(simonSays[simonSays.length - 1]);
+	}, 500);
+}
+
 function simonsTurn () {
 	simonRandom();
-	simonPlays();
+	if (advancedPlay == true) {
+		simonsAdvancedPlay();
+	} else {
+		simonPlays();
+	}
 }
 
 function gameOver() {
-    location.reload(true);
-	alert('GAME OVER! You made it ' + simonSays.length + ' rounds! Thanks for playing!')
+	document.getElementById("gameOverAudio").play();
+	alert('You survived for ' + simonSays.length + ' nights!');
+	location.reload(true);
 }
 
 $('#play').click(function (e) {
+	e.preventDefault();
 	simonSays = [];
+	simonsTurn();
+});
+
+$('#advanced').click(function (e) {
+	e.preventDefault();
+
+	simonSays = [];
+	advancedPlay = true;
 	simonsTurn();
 });
