@@ -4,11 +4,6 @@ body {
 	background-repeat: no-repeat;
 	background-position: top right
 }
-#gamebox {
-	-ms-transform: rotate(45deg); /* IE 9 */
-	-webkit-transform: rotate(45deg); /* Safari */
-	transform: rotate(45deg);
-}
 .rotate {
 	transform: rotate(270deg);
 	margin-top: 40px;
@@ -27,6 +22,9 @@ body {
 	top: 0; right: 0; bottom: 0; left: 0;
 	border-width: 1px;
 	border-color: blue;
+	-ms-transform: rotate(45deg); /* IE 9 */
+	-webkit-transform: rotate(45deg); /* Safari */
+	transform: rotate(45deg);
 }
 .square {
 	width: 150px;
